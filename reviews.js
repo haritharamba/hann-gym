@@ -4,6 +4,8 @@
    { name: "Ravi K", detail: "12-week fat loss", rating: 5, text: "Their plan changed how I eat and train." },
 ======================================================= */
 const REVIEWS = [
+   { name: "Ravi K", detail: "12-week fat loss", rating: 5, text: "Their plan changed how I eat and train." },
+  { name: "Anu S", rating: 4, text: "Weekly check-ins kept me on track." },
 
 ];
 
