@@ -1558,3 +1558,18 @@ footer {
         grid-template-columns: 1fr
     }
 }
+
+/* ===== reviews ===== */
+#revList{grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin-bottom:50px}
+.stars{color:var(--gold);letter-spacing:.15em;font-size:1.2rem;margin-bottom:6px}
+.revbox h3{margin-bottom:14px}
+.revform{max-width:560px;background:var(--steel);padding:28px;border:1px solid rgba(212,162,76,.25);border-radius:8px}
+textarea{padding:13px;background:var(--ink);border:1px solid #3d3d3d;border-radius:4px;color:var(--chalk);font:inherit;resize:vertical}
+.rl{display:block;color:var(--gold);font-weight:500;margin-bottom:4px}
+.rate{display:flex;flex-direction:row-reverse;justify-content:flex-end}
+.rate input{position:absolute;opacity:0;width:1px;height:1px;padding:0;border:0}
+.rate label{display:inline-block;font-size:2.2rem;line-height:1;color:#555;cursor:pointer;padding:0 3px;transition:color .15s,transform .15s}
+.rate label:hover{transform:scale(1.15)}
+.rate label:hover,.rate label:hover~label,.rate input:checked~label{color:var(--gold)}
+.rate input:focus-visible+label{outline:3px solid var(--gold);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
