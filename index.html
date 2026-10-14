@@ -76,17 +76,32 @@
         </div>
     </section>
 
-    <section class="sec" id="testimonials">
-        <div class="wrap">
-            <h2>What clients say</h2>
-            <div class="quotes">
-                <!-- Replace these three with your real client testimonials -->
-                <blockquote>I had tried five gyms and nothing stuck. The weekly check-ins are what kept me going.<cite>Client name, age, city</cite></blockquote>
-                <blockquote>The food plan fit my job and my family. I never felt like I was on a diet.<cite>Client name, age, city</cite></blockquote>
-                <blockquote>My strength doubled and my waist came down. The coaching is worth every rupee.<cite>Client name, age, city</cite></blockquote>
-            </div>
+   <section class="sec" id="testimonials">
+    <div class="wrap">
+        <h2>Client reviews</h2>
+        <p class="lead" id="revSummary"></p>
+        <div class="quotes" id="revList"></div>
+        <div class="revbox">
+            <h3>Trained with H'ANN? Write a review</h3>
+            <form id="revForm" class="revform">
+                <label>Your name<input id="rvName" required maxlength="40" autocomplete="name"></label>
+                <div>
+                    <span class="rl">Your rating</span>
+                    <div class="rate" role="radiogroup" aria-label="Rating">
+                        <input type="radio" name="rate" id="r5" value="5" required><label for="r5"><span class="sr">5 stars</span>&#9733;</label>
+                        <input type="radio" name="rate" id="r4" value="4"><label for="r4"><span class="sr">4 stars</span>&#9733;</label>
+                        <input type="radio" name="rate" id="r3" value="3"><label for="r3"><span class="sr">3 stars</span>&#9733;</label>
+                        <input type="radio" name="rate" id="r2" value="2"><label for="r2"><span class="sr">2 stars</span>&#9733;</label>
+                        <input type="radio" name="rate" id="r1" value="1"><label for="r1"><span class="sr">1 star</span>&#9733;</label>
+                    </div>
+                </div>
+                <label>Your review<textarea id="rvText" required minlength="20" maxlength="500" rows="4" placeholder="Tell us about your experience with H'ANN coaching"></textarea></label>
+                <button class="btn" type="submit">Send review</button>
+                <p class="note" id="rvNote">Your review is sent to H'ANN on WhatsApp. After approval it appears on this page.</p>
+            </form>
         </div>
-    </section>
+    </div>
+</section>
 
     <section class="sec alt" id="how">
         <div class="wrap">
