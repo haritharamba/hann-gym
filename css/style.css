@@ -1573,3 +1573,6 @@ textarea{padding:13px;background:var(--ink);border:1px solid #3d3d3d;border-radi
 .rate label:hover,.rate label:hover~label,.rate input:checked~label{color:var(--gold)}
 .rate input:focus-visible+label{outline:3px solid var(--gold);outline-offset:2px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+/* BMI scale labels */
+.scale{margin-bottom:24px}
+.tk{position:absolute;top:17px;transform:translateX(-50%);font-size:.7rem;color:var(--mute)}
