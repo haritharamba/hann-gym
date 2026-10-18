@@ -1,5 +1,9 @@
 :root{
-  --ink:#0E1A2B; --steel:#1B2B42; --chalk::#EEF1F5; --flame:#FF5A1F; --mute:#9DB0C8;
+    --ink: #0E1A2B;
+    --steel: #1B2B42;
+    --chalk: #EEF1F5;
+    --flame: #FF5A1F;
+    --mute: #9DB0C8;
   --head:'Big Shoulders Display','Impact','Arial Narrow',sans-serif;
   --body:'Barlow','Segoe UI',Arial,sans-serif;
 }
