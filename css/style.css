@@ -1576,3 +1576,16 @@ textarea{padding:13px;background:var(--ink);border:1px solid #3d3d3d;border-radi
 /* BMI scale labels */
 .scale{margin-bottom:24px}
 .tk{position:absolute;top:17px;transform:translateX(-50%);font-size:.7rem;color:var(--mute)}
+/* ===== calculator v5 (units, settings, activity table) ===== */
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.set{border:1px solid #3d3d3d;border-radius:4px;padding:12px 14px;background:var(--ink)}
+.set summary{cursor:pointer;color:var(--gold);font-weight:600}
+.set[open] summary{margin-bottom:12px}
+.set label{margin-bottom:12px}
+.set input,.set select{background:var(--steel)}
+.lv{margin:18px 0}
+.lv tr.on td{background:var(--gold);color:var(--ink);font-weight:600}
+.calc-err{color:#ff8a80}
+/* BMI scale labels */
+.scale{margin-bottom:24px}
+.tk{position:absolute;top:17px;transform:translateX(-50%);font-size:.7rem;color:var(--mute)}
