@@ -207,7 +207,7 @@ if (calcForm) {
     const pct = g => Math.round(g / r.cal * 100);
     const pos = Math.min(100, Math.max(0, (r.bmi - 15) / 25 * 100));
     const a = (18.5 - 15) / 25 * 100, b = (r.ow - 15) / 25 * 100, c2 = (r.ob - 15) / 25 * 100;
-    const grad = `linear-gradient(90deg,#4aa3ff 0 ${a}%,#3ecf8e ${a}% ${b}%,#EBC577 ${b}% ${c2}%,#A9772B ${c2}%)`;
+    const grad = `linear-gradient(90deg,#4aa3ff 0 ${a}%,#3ecf8e ${a}% ${b}%,#ffb347 ${b}% ${c2}%,#ff4a10 ${c2}%)`;
     const msg = `Hi, I used the H'ANN calculator. ${male ? "Male" : "Female"}, ${age} years, ${Math.round(h)} cm, ${Math.round(w * 10) / 10} kg${r.hasBF ? ", " + bf + "% body fat" : ""}. BMI ${r.bmi.toFixed(1)}. My maintenance is ${fmt(r.maint)} kcal/day and my target is ${fmt(r.cal)} kcal/day. I am interested in ${r.prog}.`;
     const wa = "https://wa.me/" + C.whatsapp + "?text=" + encodeURIComponent(msg);
 
