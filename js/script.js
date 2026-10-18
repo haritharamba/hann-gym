@@ -163,32 +163,35 @@ function calcPlan({ male, age, h, w, act, bf, std, formula }) {
 
 const calcForm = $("#calcForm");
 if (calcForm) {
+  // Helpers that never crash if a field is missing from index.html
+  const radio = name => { const g = calcForm.elements[name]; return g ? g.value : undefined; };
+  const val = (sel, d) => { const e = $(sel); return e && e.value !== "" ? e.value : d; };
+  const setHidden = (sel, v) => { const e = $(sel); if (e) e.hidden = v; };
   const sync = () => {                                   // show the right fields for the chosen units and formula
-    const us = calcForm.u.value === "us";
-    $("#hMetric").hidden = us; $("#hUS").hidden = !us;
-    $("#wLbl").textContent = us ? "Weight (pounds)" : "Weight (kg)";
-    $("#bfRow").hidden = $("#cForm").value !== "katch";
+    const us = radio("u") === "us";
+    setHidden("#hMetric", us); setHidden("#hUS", !us);
+    const wl = $("#wLbl"); if (wl) wl.textContent = us ? "Weight (pounds)" : "Weight (kg)";
+    setHidden("#bfRow", val("#cForm", "mifflin") !== "katch");
   };
   calcForm.addEventListener("change", sync);
   sync();
 
-  calcForm.addEventListener("submit", e => {
-    e.preventDefault();
+  const runCalc = () => {
     const out = $("#calcOut");
     const err = m => { out.innerHTML = `<p class="calc-err">${m}</p>`; };
-    const us = calcForm.u.value === "us", male = calcForm.g.value === "m";
-    const age = +$("#cAge").value, act = +$("#cAct").value, formula = $("#cForm").value;
-    const h = us ? ((+$("#cFt").value || 0) * 12 + (+$("#cIn").value || 0)) * 2.54 : +$("#cH").value;
-    const w = us ? +$("#cW").value * 0.45359237 : +$("#cW").value;
-    const bf = parseFloat($("#cBF").value);
+    const us = radio("u") === "us", male = radio("g") !== "f";
+    const age = +val("#cAge", 0), act = +val("#cAct", 1.2), formula = val("#cForm", "mifflin");
+    const h = us ? ((+val("#cFt", 0)) * 12 + (+val("#cIn", 0))) * 2.54 : +val("#cH", 0);
+    const w = us ? +val("#cW", 0) * 0.45359237 : +val("#cW", 0);
+    const bf = parseFloat(val("#cBF", ""));
     if (!(age >= 18 && age <= 80)) return err("Please enter an age between 18 and 80.");
     if (!(h >= 90 && h <= 260)) return err("Please enter a valid height.");
     if (!(w >= 25 && w <= 400)) return err("Please enter a valid weight.");
     if (formula === "katch" && !(bf >= 3 && bf <= 70)) return err("Katch-McArdle needs your body fat %, between 3 and 70.");
 
-    const std = $("#cStd").value;
+    const std = val("#cStd", "intl");
     const r = calcPlan({ male, age, h, w, act, bf, std, formula });
-    const kj = $("#cUnit").value === "kj", un = kj ? "kJ" : "Calories";
+    const kj = val("#cUnit", "cal") === "kj", un = kj ? "kJ" : "Calories";
     const fmt = n => Math.round(n).toLocaleString("en-IN");
     const U = n => fmt(kj ? n * 4.184 : n);
     const formulaName = r.hasBF ? "Katch-McArdle" : "Mifflin St Jeor";
@@ -230,11 +233,16 @@ if (calcForm) {
       <div class="macro"><span>Fats</span><div class="mbar"><i data-w="${pct(r.f * 9)}"></i></div><b>${r.f} g</b></div>
       <div class="recbox"><span class="cat">Recommended coaching</span><h3>${r.prog}</h3><p>${r.plan}</p>
         <a class="btn" href="${wa}" target="_blank" rel="noopener">Get my plan on WhatsApp</a></div>
-      <p class="note">Estimates only. BMI uses ${$("#cStd").value === "intl" ? "international (WHO)" : "Asian/Indian"} cut-offs and does not measure muscle. Fat loss never goes below ${fmt(r.minCal)} calories. Calories are adjusted at your weekly check-ins. If you have a medical condition, take medication or are pregnant, check with your doctor before changing your diet.</p>`;
+      <p class="note">Estimates only. BMI uses ${std === "intl" ? "international (WHO)" : "Asian/Indian"} cut-offs and does not measure muscle. Fat loss never goes below ${fmt(r.minCal)} calories. Calories are adjusted at your weekly check-ins. If you have a medical condition, take medication or are pregnant, check with your doctor before changing your diet.</p>`;
 
     requestAnimationFrame(() => requestAnimationFrame(() => {
-      $("#bmiMark").style.left = pos + "%";
+      const mk = $("#bmiMark"); if (mk) mk.style.left = pos + "%";
       $$("#calcOut .mbar i").forEach(i => i.style.width = i.dataset.w + "%");
     }));
+  };
+  calcForm.addEventListener("submit", e => {
+    e.preventDefault();
+    try { runCalc(); }
+    catch (err) { console.error(err); $("#calcOut").innerHTML = '<p class="calc-err">Something went wrong: ' + err.message + '. Press F12 and open the Console tab to see details.</p>'; }
   });
 }
